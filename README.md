@@ -4,7 +4,19 @@
 
 Dalam era digital saat ini, seseorang memiliki akses yang luas terhadap berbagai pilihan film dari berbagai genre, sutradara, dan tahun rilis. Namun, kemudahan akses ini seringkali disertai dengan tantangan dalam menavigasi pilihan konten yang besar dan beragam. Pengalaman menonton film yang memuaskan terkadang dapat terhalang oleh kesulitan dalam menemukan film yang sesuai dengan preferensi pribadi.
 
-Pada konteks ini, sistem rekomendasi film menjadi solusi yang relevan. Sistem ini dapat membantu pengguna menemukan film-film yang serupa dengan film yang telah mereka tonton. Melalui proyek ini, pengguna dapat mencari film yang sesuai preferensi mereka. Dengan memanfaatkan teknik Content-Based Filtering, proyek ini diharapkan dapat mengatasi beberapa tantangan utama dalam menciptakan pengalaman menonton yang lebih khusus dan memuaskan bagi setiap pengguna. Proyek ini penting diselesaikan karena dapat membantu pengguna untuk memilih film sesuai preferensi pribadi mereka. Jadi tidak ada lagi kebingungan ketika menentukan film yang ingin ditonton.
+Pada konteks ini, sistem rekomendasi film menjadi solusi yang relevan. Sistem ini dapat membantu pengguna menemukan film-film yang serupa dengan film yang telah mereka tonton. Melalui proyek ini, pengguna dapat mencari film yang sesuai preferensi mereka. Dengan memanfaatkan teknik Content-Based Filtering, proyek ini diharapkan dapat mengatasi beberapa tantangan utama dalam menciptakan pengalaman menonton yang lebih khusus dan memuaskan bagi setiap pengguna. 
+Proyek ini memiliki beberapa manfaat signifikan terhadap pengalaman pengguna dan potensi penerapan dalam industri film. Berikut adalah beberapa manfaat tersebut:
+### Manfaat terhadap pengalaman pengguna
+
+- Personalisasi Pengalaman: Rekomendasi film memungkinkan pengguna untuk mendapatkan rekomendasi yang disesuaikan dengan preferensi mereka. Ini membantu meningkatkan personalisasi pengalaman pengguna, membuatnya lebih relevan dan memuaskan. Pengguna dapat kepuasan tersendiri ketika mendapatkan rekomendasi film yang sesuai dengan preferensi mereka.
+
+- Eksplorasi Konten Baru: Dengan algoritma rekomendasi yang canggih, pengguna dapat menemukan film-film baru yang mungkin tidak akan mereka temui secara manual. Ini membuka peluang untuk mengeksplorasi berbagai genre dan karya seni.
+
+### Potensi penerapan dalam industri film
+
+Dengana adanya sistem rekomendasi yang efektif, dapat meningkatkan kecendrungan untuk terus menonton di platform tersebut. Pengguna yang mendapatkan rekomendasi yang memuaskan lebih cenderung tetap berlangganan atau membeli lebih banyak konten. Tidak hanya itu informasi yang diperoleh dari sistem rekomendasi dapat membantu industri film mengidentifikasi tren dan preferensi baru. Ini dapat merangsang para sutradara dalam menciptakan sebuah karya yang lebih sesuai dengan selera penonton.
+
+Oleh karena itu proyek ini penting diselesaikan karena dapat membantu pengguna untuk memilih film sesuai preferensi pribadi mereka. Jadi tidak ada lagi kebingungan ketika menentukan film yang ingin ditonton.
 
 ## Business Understanding
 
@@ -32,6 +44,12 @@ Data yang digunakan untuk proyek ini diambil dari [Kaggle](https://www.kaggle.co
 - Dataset memiliki 2 fitur bertipe float64
 - Dataset memiliki 1 fitur bertipe int64
 - Terdapat missing value dalam dataset
+- Tidak terdapat data duplikat dalam dataset
+- Distribusi genre film yang merata dan memiliki 21 genre
+- Genre tersebut diantaranya yaitu 'Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime',
+       'Drama', 'Family', 'Fantasy', 'Film-Noir', 'History', 'Horror', 'Music',
+       'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Sport', 'Thriller', 'War',
+       'Western'.
 
 Variabel-variabel pada IMDB Movies Dataset dataset adalah sebagai berikut:
 - Poster_Link: Tautan poster yang digunakan imdb
@@ -133,12 +151,12 @@ Untuk genre dari film memiliki kategori seperti ini.
  'Adventure, Comedy, War']
 ```
 
-Jika dianilisis lebih dalam jenis genre ini bisa dijadikan one hot encoding untuk selanjutnya di hitung similarity nya. 
+Dari kategori tersebut dapat dilihat bahwa 1 film bisa memiliki beberapa macam genre. Pengelompokkan genre tersebut didasarkan oleh film. Jika dianilisis lebih dalam jenis genre ini bisa dijadikan one hot encoding untuk selanjutnya di hitung similarity nya. 
 
 ## Data Preparation
 - Membuang missing value
 
-    Pada tahap pre-processing data, akan dilakukan penghapusan terhadap nilai yang nulll. Hal ini dilakukan agar tidak mempengaruhi proses rekomendasi. Karena jika terdapat missing value dapat menyebabkan gangguan dalam proses rekomendasi, mengingat nilai yang tidak lengkap dapat menghasilkan hasil yang tidak akurat. Penghapusan missing value dilakukan untuk semua fitur. Setelah dilakukan penghapusan sample data berkurang menjadi 714. Ini merupakan penurunan yang sangat besar dan dapat menunjukkan juga bahwa data memiliki banyak missing value.
+    Pada tahap pre-processing data, akan dilakukan penghapusan terhadap nilai yang nulll. Hal ini dilakukan agar tidak mempengaruhi proses rekomendasi. Karena jika terdapat missing value dapat menyebabkan gangguan dalam proses rekomendasi, mengingat nilai yang tidak lengkap dapat menghasilkan hasil yang tidak akurat. Penghapusan missing value dilakukan untuk semua fitur. 
 
 - Menghapus data duplikat
 
@@ -146,29 +164,65 @@ Jika dianilisis lebih dalam jenis genre ini bisa dijadikan one hot encoding untu
 
 - Menghapus kolom yang tidak diperlukan
 
-    Penghapusan kolom yang tidak diperlukan dilakukan untuk mempermudah proses pengelolaan data. Kolom yang dihapus diantaranya yaitu Poster_Link, Overview, Gross, Released_Year, Runtime, Meta_score, No_of_Votes dan Certificate. Alasan mengapa kolom tersebut dihapus adalah karena kolom tersebut tidak diperlukan dalam membuat sistem rekomendasi. Serta agar dapat fokus pada kolom-kolom yang penting.
+    Penghapusan kolom yang tidak diperlukan dilakukan untuk mempermudah proses pengelolaan data. Kolom yang dihapus diantaranya yaitu Poster_Link, Overview, Gross, Released_Year, Runtime, Meta_score, No_of_Votes dan Certificate. Alasan mengapa kolom tersebut dihapus adalah karena kolom tersebut tidak diperlukan dalam membuat sistem rekomendasi. Serta agar dapat fokus pada kolom-kolom yang penting. Berikut merupakan alasan rinci dari setiap kolom
+
+    - Poster_Link: Dilakukan penghapusan karena kolom ini berisi link poster dari film. Jadi link poster tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
+    - Overview: Dilakukan penghapusan karena kolom ini berisi sinopsis dari film. Jadi sinopsis tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
+    - Gross: Dilakukan penghapusan karena kolom ini berisi uang yang diperoleh dari film. Jadi jumlah uang juga tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
+    - Released_Year: Dilakukan penghapusan karena kolom ini berisi tahun liris film. Jadi tahun rilis tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
+    - Runtime: Dilakukan penghapusan karena kolom ini berisi durasi penayangan film. Jadi durasi penayangan tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
+    - Meta_score: Dilakukan penghapusan karena kolom ini berisi skor yang diperoleh film. Jadi skor tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
+    - No_of_Votes: Dilakukan penghapusan karena kolom ini berisi jumlah total suara dari film. Jadi total suara tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
+    - Certificate: Dilakukan penghapusan karena kolom ini berisi sertifikat yang diperoleh film. Jadi sertifikat tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
 
 ## Modeling
 ### One-hot Encoding
-Pada tahap ini dilakukan proses konversi fitur genre menjadi representasi biner menggunakan metode one-hot encoding. One-hot encoding bertujuan untuk mengubah variabel kategorikal menjadi vektor biner, di mana setiap kategori direpresentasikan sebagai suatu kolom dengan nilai biner 1 atau 0. Hasil dari one-hot encoding dapat dilihat digambar berikut:
+Pada tahap ini dilakukan proses konversi fitur genre menjadi representasi biner menggunakan metode one-hot encoding. One-hot encoding bertujuan untuk mengubah variabel kategorikal menjadi vektor biner, di mana setiap kategori direpresentasikan sebagai suatu kolom dengan nilai biner 1 atau 0. Hasil dari one-hot encoding dapat dilihat ditabel berikut:
 
-![one-hot-encoding](https://github.com/salsabilar311/Movie-Recommendation-System/blob/7c8b61e85a4b9257d2dce5320b58d9e201f93944/one-hot-encoding.png?raw=true)
+| Series_Title | Action | Comedy | Crime | Drama|
+|:-----------:|:----------:|:---------:|:---------:|:---------:|
+| The Shawshank Redemption| 0  | 0  | 0  | 1  |
+| The Godfather| 0  | 0  | 1  | 1  |
+| The Dark Knight| 1  | 0  | 1  | 1  |
 
-Dapat dilihat bahwa setiap film memiliki lebih dari 1 genre. Ini menunjukkan bahwa 1 film bisa memiliki berbagai macam genre. Keberadaan multiple genres memberikan informasi lebih detail tentang karakteristik film, dan dapat membantu dalam meningkatkan ketepatan dan keberagaman rekomendasi. Misalnya, jika seorang pengguna menikmati film dengan kombinasi "Action" dan "Adventure," model rekomendasi dapat memberikan saran yang lebih spesifik berdasarkan preferensi yang lebih kompleks tersebut.
+Dapat dilihat bahwa setiap film memiliki lebih dari 1 genre. Ini menunjukkan bahwa 1 film bisa memiliki berbagai macam genre. Keberadaan multiple genres memberikan informasi lebih detail tentang karakteristik film, dan dapat membantu dalam meningkatkan ketepatan dan keberagaman rekomendasi. Misalnya, jika seorang pengguna menikmati film dengan kombinasi "Action" dan "Crime," model rekomendasi dapat memberikan saran yang lebih spesifik berdasarkan preferensi yang lebih kompleks tersebut. Keuntungan dari one-hot encoding untuk sistem rekomendasi ini adalah one-hot encoding sederhana dan efisien untuk mengubah data kategorikal menjadi bentuk yang dapat diproses oleh algoritma machine learning. Cocok untuk memproses genre yang merupakan data kategorikal. Kelemahan dari one-hot encoding untuk sistem rekomendasi ini adalah jika terdapat banyak kategori, one-hot encoding dapat menghasilkan vektor dengan dimensi tinggi, yang bisa menyebabkan masalah "curse of dimensionality" dan membutuhkan penyimpanan dan pemrosesan yang lebih besar. Oleh karena itu hanya genre yang di proses menggunakan one-hot encoding, karena genre memiliki nilai yang terbatas.
 
 ### Cosine Similarity
 
-Pada tahap ini dilakukan proses penghitungan derajat kesamaan antar genre dengan teknik cosine similarity. Sample dari hasil dapat dilihat pada gambar dibawah ini.
+Pada tahap ini dilakukan proses penghitungan derajat kesamaan antar genre dengan teknik cosine similarity. Sample dari hasil dapat dilihat pada tabel dibawah ini.
 
-![cosine similarity](https://github.com/salsabilar311/Movie-Recommendation-System/blob/7c8b61e85a4b9257d2dce5320b58d9e201f93944/cosine%20similarity.png?raw=true)
+|Series_Title |The Conversation |What Ever Happened to Baby Jane?|The Dark Knight|
+|:-----------:|:----------:|:---------:|:---------:|
+| The Bourne Ultimatum| 0.666667 |0.333333| 0.333333|
+| Life of Pi| 0.333333 |0.333333| 0.333333|
+| The Innocents	|0.000000 |0.577350	| 0.000000|
 
-Dapat dilihat pada gambar di atas bahwa antar film dengan film lainnya memimiliki derajat kesamaan antara 0 sampai 1. Nilai 0 menunjukkan bahwa film tidak memiliki kemiripan. Dan 1 menunjukkan bahwa film memiliki kemiripan yang kuat. 
+Dapat dilihat pada tabel di atas bahwa antar film dengan film lainnya memimiliki derajat kesamaan antara 0 sampai 1. Nilai 0 menunjukkan bahwa film tidak memiliki kemiripan. Dan nilai yang semakin mendekati 1 menunjukkan bahwa film memiliki kemiripan yang kuat. Keuntungan cosine similarity terhadap sistem rekomendasi ini adalah perhitungannya yang efisien, terutama dalam situasi dengan data vektor yang besar. Cocok dengan fitur genre karena memiliki 21 tipe. Kelemahan cosine similarity terhadap sistem rekomendasi ini adalah cosine similarity hanya mempertimbangkan arah, sehingga sensitif terhadap pemilihan fitur. Jika fitur yang dipilih tidak memahami dengan baik preferensi pengguna, hasilnya bisa kurang akurat.
 
 ### Hasil rekomendasi
 
-![hasil rekomendasi](https://github.com/salsabilar311/Movie-Recommendation-System/blob/7c8b61e85a4b9257d2dce5320b58d9e201f93944/hasil%20rekomendasi.png)
+Setelah menghitung derajat kesamaan pada setiap film, langkah selanjutnya adalah membuat fungsi untuk menghasilkan rekomendasi film. Parameter yang di set pada function diantaranya sebagai berikut:
 
-Dapat dilihat dari gambar di atas bahwa ketika memasukkan judul Titanic sistem menghasilkan 5 rekomendasi film yang bergenre drama dan romance. Ini mmenunjukkan bahwa sistem rekomendasi dapat memahami konteks dan karakteristik film yang diinginkan oleh pengguna, dalam hal ini, genre "drama" dan "romance".
+- ```nama_film``` : Nama film yang akan dicari rekomendasi nya
+- ```Similarity_data``` : Dataframe yang berisi data similarity yang telah di definisikan sebelumnya
+- ```Items``` : Nama dan fitur yang digunakan untuk mendefinisikan kemiripan, dalam hal ini adalah ‘Series_Title’ dan ‘Genre’
+- ```k``` : Banyak rekomendasi yang ingin diberikan. Pada proyek ini k di isi 5. Jadi hanya mengambil 5 rekomendasi teratas.
+
+Fungsi ini bekerja dengan cara mengambil data dengan menggunakan ```argpartition``` untuk mengambil sejumlah nilai k tertinggi dari similarity data. Setelah itu mengambil data dengan similarity terbesar dari index yang ada. Data tersebut lalu dimasukkan ke variabel ```closest```. 
+Untuk menghindari munculnya nama film yang dicari dalam daftar rekomendasi maka, nama film yang dicari dihapus dari variabel ```closest```. 
+Nilai yang dikembalikan dari function ini adalah dataframe yang memiliki daftar film yang memiliki kemiripan yang tinggi.
+
+Hasil rekomendasi dari film Titanic.
+
+|Series_Title| Genre|
+|:----------:|:----:|
+|Call Me by Your Name|Drama, Romance|
+|Fa yeung nin wah|Drama, Romance|
+|The Bridges of Madison County|	Drama, Romance|
+|Before Midnight|Drama, Romance|
+|Brokeback Mountain|Drama, Romance|
+
+Dapat dilihat dari tabel di atas bahwa ketika memasukkan judul Titanic sistem menghasilkan 5 rekomendasi film yang bergenre drama dan romance. Ini mmenunjukkan bahwa sistem rekomendasi dapat memahami konteks dan karakteristik film yang diinginkan oleh pengguna, dalam hal ini, genre "drama" dan "romance".
 
 ## Evaluation
 
@@ -178,7 +232,7 @@ $Precision = \frac{\text{Jumlah item relevan yang direkomendasikan}}{\text{Total
 
 $Precision = \frac{\text{5}}{\text{5}} \ = 100$
 
-Dari hasil rekomendasi sebelumnya, diketahui bahwa Titanic masuk ke dalam kategori Drama, Romance. Dan dapat dilihat dari 5 film yang direkomendasikan, kelimanya memiliki genre Drama, Romance. Artinya, precision yang didapat sebesar 5/5 atau 100%. Ini menunjukkan hasil yang sangat bagus. Hasil ini menandakan bahwa sistem telah berhasil memberikan rekomendasi yang kuat.
+Dari hasil rekomendasi sebelumnya, diketahui bahwa Titanic masuk ke dalam kategori Drama, Romance. Dan dapat dilihat dari 5 film yang direkomendasikan, kelimanya memiliki genre Drama, Romance. Artinya, precision yang didapat sebesar 5/5 atau 100%. Ini menunjukkan hasil yang sangat bagus. Hasil ini menandakan bahwa sistem telah berhasil memberikan rekomendasi yang kuat. Meskipun nilai precision yang tinggi (100%) terlihat bagus, tetapi perlu dilakukan analisis lebih lanjut untuk memahami potensi kelemahan atau bias dari model rekomendasi tersebut. Salah satu aspek yang perlu diperhatikan adalah resiko model overfitting. Model mungkin terlalu "memahami" preferensi pengguna tertentu, bahkan mungkin ke preferensi yang sangat spesifik. Ini bisa mengarah pada overfitting di mana model tidak dapat menggeneralisasi dengan baik untuk pengguna lain yang memiliki preferensi yang lebih beragam. Model yang overfitting dapat menyebabkan model belajar dengan sangat baik sehingga ketika ada data yang baru model cenderung tidak belajar dan tidak bisa memahami pola yang ada. Untuk mendapatkan pemahaman yang baik terhadap masalah ini perlu dilakukan analisis lebih lanjut.
 
 Hasil dari proyek ini dilihat berdasarkan:
 
