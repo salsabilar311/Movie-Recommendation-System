@@ -2,41 +2,25 @@
 
 ## Project Overview
 
-Pada bagian ini, Kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+Dalam era digital saat ini, seseorang memiliki akses yang luas terhadap berbagai pilihan film dari berbagai genre, sutradara, dan tahun rilis. Namun, kemudahan akses ini seringkali disertai dengan tantangan dalam menavigasi pilihan konten yang besar dan beragam. Pengalaman menonton film yang memuaskan terkadang dapat terhalang oleh kesulitan dalam menemukan film yang sesuai dengan preferensi pribadi.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Jelaskan mengapa proyek ini penting untuk diselesaikan.
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
-  
-  Format Referensi: [Judul Referensi](https://scholar.google.com/) 
+Pada konteks ini, sistem rekomendasi film menjadi solusi yang relevan. Sistem ini dapat membantu pengguna menemukan film-film yang serupa dengan film yang telah mereka tonton. Melalui proyek ini, pengguna dapat mencari film yang sesuai preferensi mereka. Dengan memanfaatkan teknik Content-Based Filtering, proyek ini diharapkan dapat mengatasi beberapa tantangan utama dalam menciptakan pengalaman menonton yang lebih khusus dan memuaskan bagi setiap pengguna. Proyek ini penting diselesaikan karena dapat membantu pengguna untuk memilih film sesuai preferensi pribadi mereka. Jadi tidak ada lagi kebingungan ketika menentukan film yang ingin ditonton.
 
 ## Business Understanding
 
-Pada bagian ini, Anda perlu menjelaskan proses klarifikasi masalah.
-
-Bagian laporan ini mencakup:
-
 ### Problem Statements
 
-Menjelaskan pernyataan masalah:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+- Bagaimana cara membuat sistem rekomendasi film berdasarkan genre?
+- Bagaimana menghasilkan rekomendasi yang sesuai dengan preferensi pengguna?
 
 ### Goals
 
-Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
-
-Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Approach” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
+- Berhasil membuat sistem rekomendasi film berdasarkan genre
+- Berhasil memberikan rekomendasi film yang sesuai dengan preferensi pengguna
 
     ### Solution statements
-    - Mengajukan 2 atau lebih solution approach (algoritma atau pendekatan sistem rekomendasi).
+    - Menggunakan content based filtering untuk memberikan rekomendasi film berdasarkan genre
+    - Mengevaluasi hasil rekomandasi apakah sesuai dengan preferensi pengguna atau tidak
 
 ## Data Understanding
 Data yang digunakan untuk proyek ini diambil dari [Kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows/data) Berikut beberapa informasi pada dataset :
@@ -168,7 +152,7 @@ Jika dianilisis lebih dalam jenis genre ini bisa dijadikan one hot encoding untu
 ### One-hot Encoding
 Pada tahap ini dilakukan proses konversi fitur genre menjadi representasi biner menggunakan metode one-hot encoding. One-hot encoding bertujuan untuk mengubah variabel kategorikal menjadi vektor biner, di mana setiap kategori direpresentasikan sebagai suatu kolom dengan nilai biner 1 atau 0. Hasil dari one-hot encoding dapat dilihat digambar berikut:
 
-![image](https://github.com/salsabilar311/Movie-Recommendation-System/assets/98375087/1b08a2f0-fadc-46db-9acb-8a2f53c6dfd5)
+![one-hot-encoding](https://github.com/salsabilar311/Movie-Recommendation-System/blob/7c8b61e85a4b9257d2dce5320b58d9e201f93944/one-hot-encoding.png?raw=true)
 
 Dapat dilihat bahwa setiap film memiliki lebih dari 1 genre. Ini menunjukkan bahwa 1 film bisa memiliki berbagai macam genre. Keberadaan multiple genres memberikan informasi lebih detail tentang karakteristik film, dan dapat membantu dalam meningkatkan ketepatan dan keberagaman rekomendasi. Misalnya, jika seorang pengguna menikmati film dengan kombinasi "Action" dan "Adventure," model rekomendasi dapat memberikan saran yang lebih spesifik berdasarkan preferensi yang lebih kompleks tersebut.
 
@@ -176,13 +160,13 @@ Dapat dilihat bahwa setiap film memiliki lebih dari 1 genre. Ini menunjukkan bah
 
 Pada tahap ini dilakukan proses penghitungan derajat kesamaan antar genre dengan teknik cosine similarity. Sample dari hasil dapat dilihat pada gambar dibawah ini.
 
-![image](https://github.com/salsabilar311/Movie-Recommendation-System/assets/98375087/c2d2f66e-3829-436a-b641-a8338677780f)
+![cosine similarity](https://github.com/salsabilar311/Movie-Recommendation-System/blob/7c8b61e85a4b9257d2dce5320b58d9e201f93944/cosine%20similarity.png?raw=true)
 
 Dapat dilihat pada gambar di atas bahwa antar film dengan film lainnya memimiliki derajat kesamaan antara 0 sampai 1. Nilai 0 menunjukkan bahwa film tidak memiliki kemiripan. Dan 1 menunjukkan bahwa film memiliki kemiripan yang kuat. 
 
 ### Hasil rekomendasi
 
-![image](https://github.com/salsabilar311/Movie-Recommendation-System/assets/98375087/d1080548-c704-44ea-ad05-403b21a128eb)
+![hasil rekomendasi](https://github.com/salsabilar311/Movie-Recommendation-System/blob/7c8b61e85a4b9257d2dce5320b58d9e201f93944/hasil%20rekomendasi.png)
 
 Dapat dilihat dari gambar di atas bahwa ketika memasukkan judul Titanic sistem menghasilkan 5 rekomendasi film yang bergenre drama dan romance. Ini mmenunjukkan bahwa sistem rekomendasi dapat memahami konteks dan karakteristik film yang diinginkan oleh pengguna, dalam hal ini, genre "drama" dan "romance".
 
@@ -199,20 +183,7 @@ Dari hasil rekomendasi sebelumnya, diketahui bahwa Titanic masuk ke dalam katego
 Hasil dari proyek ini dilihat berdasarkan:
 
 - Konteks data: Data yang dimiliki telah berhasil menghasilkan sistem rekomendasi film yang akurat.
-- Problem statement: Hasil dari proyek ini telah berhasil untuk menjawab pertanyaan yang ada di problem statement. Semua fitur dapat mempengaruhi kualitas dari air.
-- Goals: Hasil dari proyek ini belum bisa menentukan fitur apa yang paling mempengaruhi kualitas air. Namun proyek ini telah mampu membuat model machine learning untuk memprediksi kualitas air.
+- Problem statement: Hasil dari proyek ini telah berhasil untuk menjawab pertanyaan yang ada di problem statement. Sistem ini dapat memberikan rekomendasi film berdasarkan genre dengan akurat.
+- Goals: Hasil dari proyek ini telah berhasil menghasilkan rekomendasi yang tepat sesuai dengan preferensi pengguna.
 
-Kesimpulannya walaupun proyek ini telah berhasil dalam menghasilkan prediksi yang diinginkan berdasarkan konteks data dan menjawab problem statement dengan membangun model machine learning untuk memprediksi kualitas air, namun belum dapat secara langsung menentukan fitur apa yang paling mempengaruhi kualitas air. Meskipun demikian, pencapaian menciptakan model machine learning adalah langkah positif yang dapat digunakan untuk memahami hubungan antara fitur-fitur tersebut dengan lebih mendalam pada tahap selanjutnya. Analisis lebih lanjut dapat dilakukan untuk mengidentifikasi pengaruh relatif dari setiap fitur terhadap prediksi kualitas air, sehingga dapat memberikan wawasan lebih lanjut terkait faktor-faktor yang paling signifikan.
-
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
-
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
-
-**---Ini adalah bagian akhir laporan---**
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+Kesimpulannya, proyek ini telah memberikan dampak positif dan berhasil mencapai tujuan yang telah ditetapkan. Dengan memanfaatkan data yang ada, sistem rekomendasi film yang akurat telah berhasil dikembangkan. Problem statement yang dihadapi berhasil diatasi, dan sistem mampu memberikan rekomendasi film dengan tingkat akurasi yang baik, terutama dalam menanggapi preferensi pengguna terkait genre. Pencapaian tujuan proyek menunjukkan bahwa model rekomendasi yang dikembangkan dapat secara efektif memahami preferensi pengguna dan memberikan rekomendasi yang relevan. Keberhasilan ini memperkuat nilai sistem rekomendasi dalam meningkatkan pengalaman menonton film pengguna dengan menyediakan rekomendasi yang sesuai dan memenuhi ekspektasi mereka.
