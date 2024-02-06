@@ -4,7 +4,7 @@
 
 Dalam era digital saat ini, seseorang memiliki akses yang luas terhadap berbagai pilihan film dari berbagai genre, sutradara, dan tahun rilis. Namun, kemudahan akses ini seringkali disertai dengan tantangan dalam menavigasi pilihan konten yang besar dan beragam. Pengalaman menonton film yang memuaskan terkadang dapat terhalang oleh kesulitan dalam menemukan film yang sesuai dengan preferensi pribadi.
 
-Pada konteks ini, sistem rekomendasi film menjadi solusi yang relevan. Sistem ini dapat membantu pengguna menemukan film-film yang serupa dengan film yang telah mereka tonton. Melalui proyek ini, pengguna dapat mencari film yang sesuai preferensi mereka. Dengan memanfaatkan teknik Content-Based Filtering, proyek ini diharapkan dapat mengatasi beberapa tantangan utama dalam menciptakan pengalaman menonton yang lebih khusus dan memuaskan bagi setiap pengguna. 
+Pada konteks ini, sistem rekomendasi film menjadi solusi yang relevan. Seperti yang dilansir dari sebuah studi yang dilakukan oleh Lemantara J. bahwa "98,4% orang merasa terbantu dengan adanya sistem rekomendasi film ini dan sebesar 93,5% berminat menggunakan sistem rekomendasi film ini untuk merekomendasikan judul film yang hendak ditonton" [1]. Ini menunjukkan bahwa sistem rekomendasi film telah membuktikan nilai dan penerimaannya dalam meningkatkan pengalaman pengguna serta membantu dalam memilih judul film yang sesuai dengan preferensi individu. Sistem ini dapat membantu pengguna menemukan film-film yang serupa dengan film yang telah mereka tonton. Melalui proyek ini, pengguna dapat mencari film yang sesuai preferensi mereka. Dengan memanfaatkan teknik Content-Based Filtering, proyek ini diharapkan dapat mengatasi beberapa tantangan utama dalam menciptakan pengalaman menonton yang lebih khusus dan memuaskan bagi setiap pengguna. 
 Proyek ini memiliki beberapa manfaat signifikan terhadap pengalaman pengguna dan potensi penerapan dalam industri film. Berikut adalah beberapa manfaat tersebut:
 ### Manfaat terhadap pengalaman pengguna
 
@@ -14,7 +14,7 @@ Proyek ini memiliki beberapa manfaat signifikan terhadap pengalaman pengguna dan
 
 ### Potensi penerapan dalam industri film
 
-Dengana adanya sistem rekomendasi yang efektif, dapat meningkatkan kecendrungan untuk terus menonton di platform tersebut. Pengguna yang mendapatkan rekomendasi yang memuaskan lebih cenderung tetap berlangganan atau membeli lebih banyak konten. Tidak hanya itu informasi yang diperoleh dari sistem rekomendasi dapat membantu industri film mengidentifikasi tren dan preferensi baru. Ini dapat merangsang para sutradara dalam menciptakan sebuah karya yang lebih sesuai dengan selera penonton.
+Dengana adanya sistem rekomendasi yang efektif, informasi yang diperoleh dari sistem rekomendasi dapat membantu industri film mengidentifikasi tren dan preferensi baru. Ini dapat merangsang para sutradara dalam menciptakan sebuah karya yang lebih sesuai dengan selera penonton.
 
 Oleh karena itu proyek ini penting diselesaikan karena dapat membantu pengguna untuk memilih film sesuai preferensi pribadi mereka. Jadi tidak ada lagi kebingungan ketika menentukan film yang ingin ditonton.
 
@@ -28,11 +28,12 @@ Oleh karena itu proyek ini penting diselesaikan karena dapat membantu pengguna u
 ### Goals
 
 - Berhasil membuat sistem rekomendasi film berdasarkan genre
-- Berhasil memberikan rekomendasi film yang sesuai dengan preferensi pengguna
+- Berhasil memberikan rekomendasi film yang sesuai dengan preferensi pengguna. Preferensi disini mengacu pada genre. Kenapa genre dipilih adalah karena genre film adalah cara yang sederhana dan mudah dimengerti untuk menggambarkan konten suatu film. Dengan memfokuskan rekomendasi pada genre, pengguna dapat dengan cepat memahami dan mengidentifikasi jenis film yang mereka sukai.
 
     ### Solution statements
     - Menggunakan content based filtering untuk memberikan rekomendasi film berdasarkan genre
-    - Mengevaluasi hasil rekomandasi apakah sesuai dengan preferensi pengguna atau tidak
+    - Mengevaluasi hasil rekomandasi apakah menggunakan metriks evaluasi yaitu recall. Jika recall yang dihasilkan lebih dari 90% maka model telah berhasil memberikan rekomendasi yang akurat.
+    - Untuk mencapai goals yang telah diterapkan maka perlu membuat sebuah model content-based filtering yang dapat memberikan rekomendasi film. Adapun langkah langkah yang perlu ditempuh adalah pertama mencari derajat kesamaan antar setiap film. Lalu membuat fungsi yang mengembalikkan daftar rekomendasi film diurutkan berdasarkan tingkat kesamaan.
 
 ## Data Understanding
 Data yang digunakan untuk proyek ini diambil dari [Kaggle](https://www.kaggle.com/datasets/harshitshankhdhar/imdb-dataset-of-top-1000-movies-and-tv-shows/data) Berikut beberapa informasi pada dataset :
@@ -54,8 +55,8 @@ Data yang digunakan untuk proyek ini diambil dari [Kaggle](https://www.kaggle.co
 Variabel-variabel pada IMDB Movies Dataset dataset adalah sebagai berikut:
 - Poster_Link: Tautan poster yang digunakan imdb
 - Series_Title: Judul film
-- Released_Year: Tahun rilis film tersebut
-- Certificate: Sertifikat yang diperoleh oleh film tersebut
+- Released_Year: Tahun rilis film tersebut. Film yang ada di dataset ini adalah film yang rilis pada rentang waktu 1920-2019
+- Certificate: Sertifikat yang diperoleh oleh film tersebut. Sertifikat pada film biasanya merujuk pada rating atau sertifikat usia yang menunjukkan seberapa cocok suatu film untuk penonton berdasarkan usia mereka. Contoh rating atau sertifikat usia termasuk, A (film ini umumnya diperuntukkan untuk penonton dewasa), UA (Universal Adult), U (Universal), PG-13 (Parents Strongly Cautioned), R (Restricted), PG (Parental Guidance), G (General Audience), Passed (film lulus sensor), TV-14 (konten ini mungkin cocok untuk penonton usia 14 tahun ke atas ketika ditayangkan di televisi), 16 (film ini cocok untuk penonton yang berusia 16 tahun ke atas), TV-MA (konten ini mungkin hanya cocok untuk penonton dewasa), Unrated (film ini mungkin tidak memiliki rating usia resmi), GP (General Patronage), Approved (Film ini mungkin telah disetujui oleh otoritas sensor atau badan penilaian setempat), TV-PG (konten ini mungkin memerlukan panduan orang tua dan dapat tidak sesuai untuk anak-anak di bawah 7 tahun) dan U/A (Universal with Adult).
 - Runtime: Total waktu tayang film tersebut
 - Genre: Genre film tersebut
 - IMDB_Rating: Rating film di situs IMDB
@@ -63,8 +64,23 @@ Variabel-variabel pada IMDB Movies Dataset dataset adalah sebagai berikut:
 - Meta_score: Skor yang diperoleh film tersebut
 - Director: Nama sutradara yang menggarap film
 - Star1, Star2, Star3, Star4: Nama artis yang memainkan film
-- No_of_votes: Jumlah total suara
+- No_of_votes: Jumlah total suara yang didapatkan sebuah film ketika pemilihan pada ajang penghargaan
 - Gross: Uang yang diperoleh dari film tersebut
+
+Sebaran fitur IMDB_Rating memiliki nilai sebagai berikut:
+
+Tabel 1. Distribusi data pada fitur IMDB_Rating
+|Distribusi data| Nilai|
+|:----:|:----:|
+|mean|7.949300|
+|std|0.275491|
+|min|7.600000|
+|25%|7.700000|
+|50%|7.900000|
+|75%|8.100000|
+|max|9.300000|
+
+Tabel 1 diatas dapat memberikan informasi mengenai sebaran data fitur IMDB_Rating. Dapat dilihat bahwa sebagian besar data berada dalam kisaran antara kuartil pertama (7.7) dan kuartil ketiga (8.1), dengan sebagian kecil data yang mungkin ekstrem di atas atau di bawah kisaran tersebut. Rata-rata dan median yang relatif dekat menunjukkan bahwa distribusi data cenderung simetris. Deviasi standar yang tidak terlalu tinggi menunjukkan bahwa data memiliki variasi yang cukup terkendali.
 
 Untuk genre dari film memiliki kategori seperti ini.
 ```Jenis Genre:  ['Drama' 'Crime, Drama' 'Action, Crime, Drama' 'Action, Adventure, Drama'
@@ -151,7 +167,7 @@ Untuk genre dari film memiliki kategori seperti ini.
  'Adventure, Comedy, War']
 ```
 
-Dari kategori tersebut dapat dilihat bahwa 1 film bisa memiliki beberapa macam genre. Pengelompokkan genre tersebut didasarkan oleh film. Jika dianilisis lebih dalam jenis genre ini bisa dijadikan one hot encoding untuk selanjutnya di hitung similarity nya. 
+Dari kategori tersebut dapat dilihat bahwa jenis genre dapat memiliki banyak kombinasi genre. Tidak hanya kombinasi genre, namun jika merujuk pada data diatas terdapat juga film yang hanya memiliki 1 genre. Contohnya film The Shawshank Redemption yang hanya memiliki 1 genre yaitu Drama. Jika dianilisis lebih dalam jenis genre ini bisa dijadikan one hot encoding untuk selanjutnya di hitung similarity nya. 
 
 ## Data Preparation
 - Membuang missing value
@@ -175,21 +191,26 @@ Dari kategori tersebut dapat dilihat bahwa 1 film bisa memiliki beberapa macam g
     - No_of_Votes: Dilakukan penghapusan karena kolom ini berisi jumlah total suara dari film. Jadi total suara tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
     - Certificate: Dilakukan penghapusan karena kolom ini berisi sertifikat yang diperoleh film. Jadi sertifikat tidak dibutuhkan untuk membuat sistem rekomendasi film berdasarkan genre.
 
+- One-hot Encoding
+
+    Pada tahap ini dilakukan proses konversi fitur genre menjadi representasi biner menggunakan metode one-hot encoding. One-hot encoding bertujuan untuk mengubah variabel kategorikal menjadi vektor biner, di mana setiap kategori direpresentasikan sebagai suatu kolom dengan nilai biner 1 atau 0. Hasil dari one-hot encoding dapat dilihat ditabel berikut:
+
+  Tabel 2. Hasil one-hot encoding
+
+    | Series_Title | Action | Comedy | Crime | Drama|
+    |:-----------:|:----------:|:---------:|:---------:|:---------:|
+    | The Shawshank Redemption| 0  | 0  | 0  | 1  |
+    | The Godfather| 0  | 0  | 1  | 1  |
+    | The Dark Knight| 1  | 0  | 1  | 1  |
+
+    Dapat dilihat bahwa setiap film memiliki lebih dari 1 genre. Ini menunjukkan bahwa 1 film bisa memiliki berbagai macam genre. Keberadaan multiple genres memberikan informasi lebih detail tentang karakteristik film, dan dapat membantu dalam meningkatkan ketepatan dan keberagaman rekomendasi. Misalnya, jika seorang pengguna menikmati film dengan kombinasi "Action" dan "Crime," model rekomendasi dapat memberikan saran yang lebih spesifik berdasarkan preferensi yang lebih kompleks tersebut. Keuntungan dari one-hot encoding untuk sistem rekomendasi ini adalah one-hot encoding sederhana dan efisien untuk mengubah data kategorikal menjadi bentuk yang dapat diproses oleh algoritma machine learning. Cocok untuk memproses genre yang merupakan data kategorikal. Kelemahan dari one-hot encoding untuk sistem rekomendasi ini adalah jika terdapat banyak kategori, one-hot encoding dapat menghasilkan vektor dengan dimensi tinggi, yang bisa menyebabkan masalah "curse of dimensionality" dan membutuhkan penyimpanan dan pemrosesan yang lebih besar. Oleh karena itu hanya genre yang di proses menggunakan one-hot encoding, karena genre memiliki nilai yang terbatas.
+
 ## Modeling
-### One-hot Encoding
-Pada tahap ini dilakukan proses konversi fitur genre menjadi representasi biner menggunakan metode one-hot encoding. One-hot encoding bertujuan untuk mengubah variabel kategorikal menjadi vektor biner, di mana setiap kategori direpresentasikan sebagai suatu kolom dengan nilai biner 1 atau 0. Hasil dari one-hot encoding dapat dilihat ditabel berikut:
-
-| Series_Title | Action | Comedy | Crime | Drama|
-|:-----------:|:----------:|:---------:|:---------:|:---------:|
-| The Shawshank Redemption| 0  | 0  | 0  | 1  |
-| The Godfather| 0  | 0  | 1  | 1  |
-| The Dark Knight| 1  | 0  | 1  | 1  |
-
-Dapat dilihat bahwa setiap film memiliki lebih dari 1 genre. Ini menunjukkan bahwa 1 film bisa memiliki berbagai macam genre. Keberadaan multiple genres memberikan informasi lebih detail tentang karakteristik film, dan dapat membantu dalam meningkatkan ketepatan dan keberagaman rekomendasi. Misalnya, jika seorang pengguna menikmati film dengan kombinasi "Action" dan "Crime," model rekomendasi dapat memberikan saran yang lebih spesifik berdasarkan preferensi yang lebih kompleks tersebut. Keuntungan dari one-hot encoding untuk sistem rekomendasi ini adalah one-hot encoding sederhana dan efisien untuk mengubah data kategorikal menjadi bentuk yang dapat diproses oleh algoritma machine learning. Cocok untuk memproses genre yang merupakan data kategorikal. Kelemahan dari one-hot encoding untuk sistem rekomendasi ini adalah jika terdapat banyak kategori, one-hot encoding dapat menghasilkan vektor dengan dimensi tinggi, yang bisa menyebabkan masalah "curse of dimensionality" dan membutuhkan penyimpanan dan pemrosesan yang lebih besar. Oleh karena itu hanya genre yang di proses menggunakan one-hot encoding, karena genre memiliki nilai yang terbatas.
-
 ### Cosine Similarity
 
 Pada tahap ini dilakukan proses penghitungan derajat kesamaan antar genre dengan teknik cosine similarity. Sample dari hasil dapat dilihat pada tabel dibawah ini.
+
+Tabel 3. Hasil cosine similarity
 
 |Series_Title |The Conversation |What Ever Happened to Baby Jane?|The Dark Knight|
 |:-----------:|:----------:|:---------:|:---------:|
@@ -197,7 +218,7 @@ Pada tahap ini dilakukan proses penghitungan derajat kesamaan antar genre dengan
 | Life of Pi| 0.333333 |0.333333| 0.333333|
 | The Innocents	|0.000000 |0.577350	| 0.000000|
 
-Dapat dilihat pada tabel di atas bahwa antar film dengan film lainnya memimiliki derajat kesamaan antara 0 sampai 1. Nilai 0 menunjukkan bahwa film tidak memiliki kemiripan. Dan nilai yang semakin mendekati 1 menunjukkan bahwa film memiliki kemiripan yang kuat. Keuntungan cosine similarity terhadap sistem rekomendasi ini adalah perhitungannya yang efisien, terutama dalam situasi dengan data vektor yang besar. Cocok dengan fitur genre karena memiliki 21 tipe. Kelemahan cosine similarity terhadap sistem rekomendasi ini adalah cosine similarity hanya mempertimbangkan arah, sehingga sensitif terhadap pemilihan fitur. Jika fitur yang dipilih tidak memahami dengan baik preferensi pengguna, hasilnya bisa kurang akurat.
+Dapat dilihat pada tabel di atas bahwa antar film dengan film lainnya memimiliki derajat kesamaan antara 0 sampai 1. Nilai 0 menunjukkan bahwa film tidak memiliki kemiripan. Dan nilai yang semakin mendekati 1 menunjukkan bahwa film memiliki kemiripan yang kuat. Alasan pemilihan cosine similarity sebagai metode perbandingan dalam content-based filtering adalah karena mudah diterapkan pada fitur yang berbentuk teks. Karena fitur yang digunakan untuk memberikan rekomendasi adalah series_title dan genre yang merupakan fitur bertipe teks atau string. Maka cosine similarity cocok untuk digunakan dalam mengukur kesamaan antara vektor representasi teks dengan baik. Ini lah mengapa cosine similarity dipilih dari algoritma lainnya untuk pendekatan content-based filtering. Keuntungan cosine similarity terhadap sistem rekomendasi ini adalah perhitungannya yang efisien, terutama dalam situasi dengan data vektor yang besar. Cocok dengan fitur genre karena memiliki 21 tipe. Kelemahan cosine similarity terhadap sistem rekomendasi ini adalah cosine similarity hanya mempertimbangkan arah, sehingga sensitif terhadap pemilihan fitur. Jika fitur yang dipilih tidak memahami dengan baik preferensi pengguna, hasilnya bisa kurang akurat.
 
 ### Hasil rekomendasi
 
@@ -210,9 +231,9 @@ Setelah menghitung derajat kesamaan pada setiap film, langkah selanjutnya adalah
 
 Fungsi ini bekerja dengan cara mengambil data dengan menggunakan ```argpartition``` untuk mengambil sejumlah nilai k tertinggi dari similarity data. Setelah itu mengambil data dengan similarity terbesar dari index yang ada. Data tersebut lalu dimasukkan ke variabel ```closest```. 
 Untuk menghindari munculnya nama film yang dicari dalam daftar rekomendasi maka, nama film yang dicari dihapus dari variabel ```closest```. 
-Nilai yang dikembalikan dari function ini adalah dataframe yang memiliki daftar film yang memiliki kemiripan yang tinggi.
+Nilai yang dikembalikan dari function ini adalah dataframe yang memiliki daftar film yang memiliki kemiripan yang tinggi. Fungsi ini mengacu pada materi Model Development dengan Content Based Filtering di course Machine Learning Terapan di dicoding. Dengan beberapa penyesuaian parameter fungsi ini digunakan untuk merekomendasikan film.
 
-Hasil rekomendasi dari film Titanic.
+Tabel 4. Hasil rekomendasi dari film Titanic.
 
 |Series_Title| Genre|
 |:----------:|:----:|
@@ -222,7 +243,7 @@ Hasil rekomendasi dari film Titanic.
 |Before Midnight|Drama, Romance|
 |Brokeback Mountain|Drama, Romance|
 
-Dapat dilihat dari tabel di atas bahwa ketika memasukkan judul Titanic sistem menghasilkan 5 rekomendasi film yang bergenre drama dan romance. Ini mmenunjukkan bahwa sistem rekomendasi dapat memahami konteks dan karakteristik film yang diinginkan oleh pengguna, dalam hal ini, genre "drama" dan "romance".
+Dapat dilihat dari tabel 4 di atas bahwa ketika memasukkan judul Titanic sistem menghasilkan 5 rekomendasi film yang bergenre drama dan romance. Ini mmenunjukkan bahwa sistem rekomendasi dapat memahami konteks dan karakteristik film yang diinginkan oleh pengguna, dalam hal ini, genre "drama" dan "romance".
 
 ## Evaluation
 
@@ -241,3 +262,6 @@ Hasil dari proyek ini dilihat berdasarkan:
 - Goals: Hasil dari proyek ini telah berhasil menghasilkan rekomendasi yang tepat sesuai dengan preferensi pengguna.
 
 Kesimpulannya, proyek ini telah memberikan dampak positif dan berhasil mencapai tujuan yang telah ditetapkan. Dengan memanfaatkan data yang ada, sistem rekomendasi film yang akurat telah berhasil dikembangkan. Problem statement yang dihadapi berhasil diatasi, dan sistem mampu memberikan rekomendasi film dengan tingkat akurasi yang baik, terutama dalam menanggapi preferensi pengguna terkait genre. Pencapaian tujuan proyek menunjukkan bahwa model rekomendasi yang dikembangkan dapat secara efektif memahami preferensi pengguna dan memberikan rekomendasi yang relevan. Keberhasilan ini memperkuat nilai sistem rekomendasi dalam meningkatkan pengalaman menonton film pengguna dengan menyediakan rekomendasi yang sesuai dan memenuhi ekspektasi mereka.
+
+## Referensi
+[1]    J. Lemantara, "Sistem Pendukung Keputusan Penentuan Film Berdasarkan dengan Metode Weighted Product," Jurnal Riset Sistem Informasi Dan Teknik Informatika (JURASIK), vol. 8, no. 1, pp. 1-14, 2023. 
