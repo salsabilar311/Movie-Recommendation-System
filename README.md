@@ -67,7 +67,12 @@ Variabel-variabel pada IMDB Movies Dataset dataset adalah sebagai berikut:
 - Released_Year: Tahun rilis film tersebut. Film yang ada di dataset ini adalah film yang rilis pada rentang waktu 1920-2019
 - Certificate: Sertifikat yang diperoleh oleh film tersebut. Sertifikat pada film biasanya merujuk pada rating atau sertifikat usia yang menunjukkan seberapa cocok suatu film untuk penonton berdasarkan usia mereka. Contoh rating atau sertifikat usia termasuk, A (film ini umumnya diperuntukkan untuk penonton dewasa), UA (Universal Adult), U (Universal), PG-13 (Parents Strongly Cautioned), R (Restricted), PG (Parental Guidance), G (General Audience), Passed (film lulus sensor), TV-14 (konten ini mungkin cocok untuk penonton usia 14 tahun ke atas ketika ditayangkan di televisi), 16 (film ini cocok untuk penonton yang berusia 16 tahun ke atas), TV-MA (konten ini mungkin hanya cocok untuk penonton dewasa), Unrated (film ini mungkin tidak memiliki rating usia resmi), GP (General Patronage), Approved (Film ini mungkin telah disetujui oleh otoritas sensor atau badan penilaian setempat), TV-PG (konten ini mungkin memerlukan panduan orang tua dan dapat tidak sesuai untuk anak-anak di bawah 7 tahun) dan U/A (Universal with Adult).
 - Runtime: Total waktu tayang film tersebut
-- Genre: Genre film tersebut
+- Genre: Genre film tersebut. Untuk persebaran data genre di dataset ini dapat dilihat pada gambar dibawah ini.
+    Gambar 1. Top 10 genres
+    ![top-100-genre](https://github.com/salsabilar311/Movie-Recommendation-System/blob/29533aadcc491a0766b79947b9adda6d12b3c708/top-100-genre.png?raw=true)
+
+    Dapat dilihat pada gambar diatas bahwa film dengan genre drama memiliki jumlah yang paling banyak yaitu sekitar 700 lebih. Ini menunjukkan bahwa film dengan genre drama mendominasi dalam dataset film yang Anda analisis, dengan jumlah yang signifikan melebihi genre-genre lainnya. Peringkat kedua disusul oleh comedy. Dan disusul oleh crime, adventure, action dsb.
+  
 - IMDB_Rating: Rating film di situs IMDB
 - Overview: Sinopsis/ringkasan dari film
 - Meta_score: Skor yang diperoleh film tersebut
@@ -181,7 +186,7 @@ Dari kategori tersebut dapat dilihat bahwa jenis genre dapat memiliki banyak kom
 ## Data Preparation
 - Membuang missing value
 
-    Pada tahap pre-processing data, akan dilakukan penghapusan terhadap nilai yang nulll. Hal ini dilakukan agar tidak mempengaruhi proses rekomendasi. Karena jika terdapat missing value dapat menyebabkan gangguan dalam proses rekomendasi, mengingat nilai yang tidak lengkap dapat menghasilkan hasil yang tidak akurat. Penghapusan missing value dilakukan untuk semua fitur. 
+    Pada tahap pre-processing data, akan dilakukan penghapusan terhadap nilai yang nulll. Hal ini dilakukan agar tidak mempengaruhi proses rekomendasi. Karena jika terdapat missing value dapat menyebabkan gangguan dalam proses rekomendasi, mengingat nilai yang tidak lengkap dapat menghasilkan hasil yang tidak akurat. Penghapusan missing value dilakukan untuk semua fitur. Terdapat alternatif lain untuk menangani missing value yaitu dengan mengisinya dengan nilai rata-rata/median/modus. Namun hal itu tidak dilakukan karena mengisinya dengan nilai rata-rata/median/modus dapat membuat hasil rekomendasi menjadi bias, terutama jika terdapat banyak nilai yang hilang pada suatu fitur.
 
 - Menghapus data duplikat
 
@@ -236,7 +241,7 @@ Setelah menghitung derajat kesamaan pada setiap film, langkah selanjutnya adalah
 - ```nama_film``` : Nama film yang akan dicari rekomendasi nya
 - ```Similarity_data``` : Dataframe yang berisi data similarity yang telah di definisikan sebelumnya
 - ```Items``` : Nama dan fitur yang digunakan untuk mendefinisikan kemiripan, dalam hal ini adalah ‘Series_Title’ dan ‘Genre’
-- ```k``` : Banyak rekomendasi yang ingin diberikan. Pada proyek ini k di isi 5. Jadi hanya mengambil 5 rekomendasi teratas.
+- ```k``` : Banyak rekomendasi yang ingin diberikan. Pada proyek ini k di isi 5. Jadi hanya mengambil 5 rekomendasi teratas. Pemilihan nilai k=5 adalah karena dapat memberikan rekomendasi yang lebih spesifik dan relevan karena hanya melibatkan sejumlah kecil tetangga terdekat. Dan juga nilai k yang terlalu besar dapat membuat pengguna menjadi tidak fokus dan dapat menyebabkan rekomendasi yang terlalu umum atau dilakukan dengan generalisasi yang tinggi. Dengan memilih nilai k=5, kita menciptakan keseimbangan yang tepat antara spesifikitas dan generalisasi dalam rekomendasi.
 
 Fungsi ini bekerja dengan cara mengambil data dengan menggunakan ```argpartition``` untuk mengambil sejumlah nilai k tertinggi dari similarity data. Setelah itu mengambil data dengan similarity terbesar dari index yang ada. Data tersebut lalu dimasukkan ke variabel ```closest```. 
 Untuk menghindari munculnya nama film yang dicari dalam daftar rekomendasi maka, nama film yang dicari dihapus dari variabel ```closest```. 
