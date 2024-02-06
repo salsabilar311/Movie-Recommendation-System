@@ -20,6 +20,15 @@ Oleh karena itu proyek ini penting diselesaikan karena dapat membantu pengguna u
 
 ## Business Understanding
 
+Implementasi sistem rekomendasi dalam industri film memiliki dampak yang signifikan, baik terhadap pengalaman pengguna maupun industri film secara keseluruhan. Berikut adalah beberapa dampak utama:
+### Dampak terhadap pengalaman pengguna 
+- Sistem rekomendasi memungkinkan personalisasi konten, memastikan bahwa pengguna menerima rekomendasi yang sesuai dengan preferensi dan sejarah penonton mereka. Ini meningkatkan kemungkinan pengguna menemukan konten yang menarik bagi mereka.
+- Pengguna tidak perlu menghabiskan waktu berlebihan untuk mencari film baru yang sesuai dengan selera mereka. Sistem rekomendasi membantu mengurangi kerumitan dan meningkatkan efisiensi dalam menemukan konten yang relevan.
+
+### Dampak Terhadap Industri Film
+- Film independen atau karya yang kurang dikenal dapat mendapatkan eksposur lebih besar melalui rekomendasi. Sistem rekomendasi dapat membuka peluang baru bagi film-film ini untuk menjangkau khalayak yang lebih luas.
+- Dengan rekomendasi yang baik, platform dapat memperluas katalog film mereka dengan menyertakan film-film yang mungkin tidak populer tetapi sesuai dengan preferensi sebagian besar penonton.
+
 ### Problem Statements
 
 - Bagaimana cara membuat sistem rekomendasi film berdasarkan genre?
@@ -27,8 +36,8 @@ Oleh karena itu proyek ini penting diselesaikan karena dapat membantu pengguna u
 
 ### Goals
 
-- Berhasil membuat sistem rekomendasi film berdasarkan genre
-- Berhasil memberikan rekomendasi film yang sesuai dengan preferensi pengguna. Preferensi disini mengacu pada genre. Kenapa genre dipilih adalah karena genre film adalah cara yang sederhana dan mudah dimengerti untuk menggambarkan konten suatu film. Dengan memfokuskan rekomendasi pada genre, pengguna dapat dengan cepat memahami dan mengidentifikasi jenis film yang mereka sukai.
+- Membuat sistem rekomendasi film berdasarkan genre
+- Memberikan rekomendasi film yang sesuai dengan preferensi pengguna. Preferensi disini mengacu pada genre. Kenapa genre dipilih adalah karena genre film adalah cara yang sederhana dan mudah dimengerti untuk menggambarkan konten suatu film. Dengan memfokuskan rekomendasi pada genre, pengguna dapat dengan cepat memahami dan mengidentifikasi jenis film yang mereka sukai.
 
     ### Solution statements
     - Menggunakan content based filtering untuk memberikan rekomendasi film berdasarkan genre
